@@ -41,7 +41,7 @@ class ClientBleGatt private constructor() :
         connectCallBack = {
             it ?: kotlin.run { trySend(null) }
             it?.let { gatt ->
-                trySend(GattClientAPI(gatt, ClientBleGattCallback.gattCallback))
+                trySend(GattClientAPI(gatt))
             }
             close()
         }

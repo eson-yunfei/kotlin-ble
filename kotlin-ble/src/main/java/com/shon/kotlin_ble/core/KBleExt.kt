@@ -21,8 +21,7 @@ import java.util.UUID
 
 val KBLEScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
-fun Context.getNativeBleManager(): BluetoothManager =
-    getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+
 
 
 fun BluetoothGatt.getGattService(serviceUUID: UUID): BluetoothGattService = getService(serviceUUID)

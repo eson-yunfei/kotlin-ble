@@ -5,9 +5,7 @@ import android.bluetooth.le.BluetoothLeScanner
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
 import android.bluetooth.le.ScanSettings
-import android.content.Context
 import android.util.Log
-import com.shon.kotlin_ble.core.getNativeBleManager
 import com.shon.kotlin_ble.core.toNative
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -24,15 +22,10 @@ import kotlinx.coroutines.launch
  * @Date 2023-10-18 16:24
  *
  */
-class KBleScanner(context: Context) {
+internal class KBleScanner(private val bluetoothLeScanner: BluetoothLeScanner) {
 
     private var stopFlag = false
 
-    private val bluetoothLeScanner: BluetoothLeScanner
-
-    init {
-        bluetoothLeScanner = context.getNativeBleManager().adapter.bluetoothLeScanner
-    }
 
     fun stopScanner() {
         stopFlag = true
@@ -93,7 +86,8 @@ class KBleScanner(context: Context) {
         return ScanSettings.Builder()
             .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
             .setReportDelay(1000)
-            .setLegacy(true)
+            .setLegacy(false)
+            .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
             .build()
     }
 }

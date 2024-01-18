@@ -1,12 +1,11 @@
 package com.shon.kotlin_ble.api
 
-import android.Manifest
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattDescriptor
 import android.os.Build
 import android.util.Log
 import androidx.annotation.IntRange
-import androidx.annotation.RequiresPermission
 import com.shon.kotlin_ble.client.ClientBleGattCallback
 import com.shon.kotlin_ble.client.ClientGattEvent
 import com.shon.kotlin_ble.core.toHexString
@@ -46,7 +45,7 @@ class GattClientAPI(private val gatt: BluetoothGatt) {
         }.launchIn(CoroutineScope(SupervisorJob() + Dispatchers.Default))
     }
 
-    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
+    @SuppressLint("MissingPermission")
     fun enableCharacteristicNotification(
         serviceUUID: UUID,
         characteristicUUID: UUID
@@ -55,7 +54,7 @@ class GattClientAPI(private val gatt: BluetoothGatt) {
         characteristicApi.enableCharacteristicNotification(characteristic)
     }
 
-    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
+    @SuppressLint("MissingPermission")
     fun writeDescriptor(descriptor: BluetoothGattDescriptor, value: ByteArray) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             gatt.writeDescriptor(descriptor, value)
@@ -65,12 +64,12 @@ class GattClientAPI(private val gatt: BluetoothGatt) {
         }
     }
 
-    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
+    @SuppressLint("MissingPermission")
     fun readDescriptor(descriptor: BluetoothGattDescriptor) {
         gatt.readDescriptor(descriptor)
     }
 
-    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
+    @SuppressLint("MissingPermission")
     fun requestMtu(@IntRange(from = 23, to = 517) mtu: Int) {
         gatt.requestMtu(mtu)
     }
@@ -102,12 +101,11 @@ class GattClientAPI(private val gatt: BluetoothGatt) {
         }
     }
 
-    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
+    @SuppressLint("MissingPermission")
     fun disconnect() {
         gatt.disconnect()
     }
 
-    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
     fun clearServicesCache() {
         try {
             val refreshMethod: Method = gatt.javaClass.getMethod("refresh")
@@ -117,7 +115,7 @@ class GattClientAPI(private val gatt: BluetoothGatt) {
         }
     }
 
-    @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
+    @SuppressLint("MissingPermission")
     fun close() {
         gatt.close()
     }
