@@ -1,9 +1,5 @@
 package com.shon.kotlin_ble.api.data
 
-import android.bluetooth.BluetoothGatt
-import android.bluetooth.BluetoothGattCharacteristic
-import java.util.UUID
-
 /**
  *
  * @Author xiao

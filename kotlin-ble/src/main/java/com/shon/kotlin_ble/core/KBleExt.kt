@@ -3,9 +3,7 @@ package com.shon.kotlin_ble.core
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattService
-import android.bluetooth.BluetoothManager
 import android.bluetooth.le.ScanFilter
-import android.content.Context
 import com.shon.kotlin_ble.scanner.BleScanFilter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

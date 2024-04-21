@@ -4,7 +4,7 @@ import android.bluetooth.le.ScanResult
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.shon.kotlin_ble.KBleManager
+import com.shon.kotlin_ble.scanner.scanDevices
 import java.util.UUID
 
 class MainViewModel:ViewModel() {
@@ -17,8 +17,7 @@ class MainViewModel:ViewModel() {
     val scanList:MutableLiveData<List<ScanResult>> = MutableLiveData()
     fun scanDevice() {
 
-        KBleManager.instance.startScan{list->
-
+        scanDevices{list->
             list.forEach {
                 if (!cacheListContainsDevice(it)){
                     cacheList.add(it)
